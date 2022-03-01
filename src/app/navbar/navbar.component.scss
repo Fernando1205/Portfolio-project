@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'yanone';
+    src: url('/assets/fonts/yayone.ttf') format("opentype")
+}
+
+.nav {
+    font-family: 'yanone';
+    background-color: rgb(59, 148, 207);
+    ul {
+        padding: 0;
+        width: 90%;
+        margin: auto;
+        display: flex;
+        li {
+            color: #fff;
+            padding: 20px;
+            margin: auto;
+            display: inline-block;
+            list-style: none;
+            a {
+                text-decoration: none;
+                &:visited {
+                    color: #fff;
+                }
+            }
+        }
+        li.logo {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    }
+}
