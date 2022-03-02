@@ -8,7 +8,7 @@
         <p>{{ project.category }}</p>
         <p>{{ project.langs }}</p>
         <p>
-            <a class="button-edit" href="">Editar</a>
+            <a class="button-edit" [routerLink]="['/edit-project/',project._id]">Editar</a>
             <a class="button-delete" (click)="deleteProject( project._id )">Borrar</a>
         </p>
     </div>

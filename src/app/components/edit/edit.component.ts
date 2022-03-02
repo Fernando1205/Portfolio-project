@@ -1,37 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Project } from 'src/app/models/project';
 import { ProjectService } from 'src/app/services/project.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { Global } from 'src/app/services/global';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss'],
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss'],
   providers: [ProjectService, UploadService]
 })
-export class CreateComponent implements OnInit {
+export class EditComponent implements OnInit {
 
   public title: string='';
   public project: Project;
   public status: string = '';
   public filesToUpload: Array<File> = [];
   public saveProject:any;
+  public url:string;
 
   constructor(
     private projectService: ProjectService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.title = 'Crear proyecto';
+    this.title = 'Editar proyecto';
     this.project = new Project('','','','',2022,'','');
+    this.url = Global.url;
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe( params => {
+      let id = params['id'];
+      this.getProject(id);
+    })
+  }
+
+  getProject(id:string ){
+    this.projectService.getProject(id).subscribe(
+      response => {
+        this.project = response.project;
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   onSubmit(form: NgForm) {
-    this.projectService.saveProject(this.project).subscribe(
+    this.projectService.updateProject(this.project).subscribe(
       response => {
 
         if(response.project){
@@ -39,16 +60,12 @@ export class CreateComponent implements OnInit {
           // Subir la imagen
           if(this.filesToUpload.length >= 1){
             this.uploadService.makeFileRequest(Global.url+'upload-image/'+response.project._id, [], this.filesToUpload,'image').then((result:any) => {
-              console.log(result);
-              this.saveProject = result.project;
-              this.status = 'success'
               form.reset();
             })
-          } else {
-            this.saveProject = response.project;
-              this.status = 'success'
-              form.reset();
           }
+          this.saveProject = response.project;
+          this.status = 'success'
+          console.log(response);
         } else {
           this.status = 'failed';
         }
