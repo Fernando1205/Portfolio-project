@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project';
 import { ProjectService } from 'src/app/services/project.service';
+import { Global } from 'src/app/services/global';
 
 @Component({
   selector: 'app-projects',
@@ -11,6 +12,7 @@ import { ProjectService } from 'src/app/services/project.service';
 export class ProjectsComponent implements OnInit {
 
   public projects: Project[] = [];
+  public url:string = '';
 
   constructor(
     private projectService: ProjectService
@@ -19,6 +21,7 @@ export class ProjectsComponent implements OnInit {
       response => {
         if(response){
           this.projects = response.project;
+          this.url = Global.url;
         }
       },
       error => {
