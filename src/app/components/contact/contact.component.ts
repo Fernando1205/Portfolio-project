@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
+  public nombre:string = '';
+  items = ['Karen', 'Ana'];
+
+  addItem(newItem: string) {
+    this.items.push(newItem);
+  }
+
   constructor() { }
 
   ngOnInit(): void {

@@ -14,6 +14,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './partials/footer/footer.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
+import { NombreHijoComponent } from './components/nombre-hijo/nombre-hijo.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EditComponent } from './components/edit/edit.component';
     ContactComponent,
     FooterComponent,
     DetailComponent,
-    EditComponent
+    EditComponent,
+    NombreHijoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>Este es el nombre del hijo pasado desde el componente padre</h1>
+    {{ nombreHijo }}
+    <hr>
+
+    <label for="item-input">Agregar hijos:</label>
+    <input type="text" id="item-input" #newItem>
+    <button type="button" (click)="addNewItem(newItem.value)">Agregar hijos a la lista</button>
+</div>
