@@ -9,7 +9,7 @@
         <p>{{ project.langs }}</p>
         <p>
             <a class="button-edit" href="">Editar</a>
-            <a class="button-delete" href="">Borrar</a>
+            <a class="button-delete" (click)="deleteProject( project._id )">Borrar</a>
         </p>
     </div>
 </div>
